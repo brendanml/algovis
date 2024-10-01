@@ -100,10 +100,6 @@ Once a path is found it will display the generated path cost as well as the numb
 - **CSS**: Styling and layout.
 - **JavaScript (jQuery)**: Interactive functionality and algorithm implementations.
 
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
 ## Acknowledgments
 
-- Inspired by common pathfinding visualization tools used in computer science education.
+- Inspired by pathfinding visualization found in Assignment 1 of CSC421 ran during Fall 2024.
