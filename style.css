@@ -1,4 +1,3 @@
-/* Reset default browser margins and paddings */
 * {
     margin: 0;
     padding: 0;
@@ -11,44 +10,43 @@ body {
 
 main {
     display: flex;
-    flex-direction: row; /* Arrange children horizontally */
-    height: 100vh;       /* Full viewport height */
+    flex-direction: row;
+    height: 100vh;
 }
 
-/* Style for the toolbar on the left */
 .tools {
-    width: 250px;               /* Fixed width for the toolbar */
-    background-color: #f0f0f0;  /* Light grey background */
+    width: 250px;
+    background-color: #f0f0f0;
     padding: 20px;
-    overflow-y: auto;           /* Scroll if content exceeds viewport height */
+    overflow-y: auto;
 }
 
-/* Style for the board on the right */
+
 .board {
-    flex-grow: 1;        /* Take up remaining space */
+    flex-grow: 1;
     padding: 20px;
-    overflow-y: auto;    /* Scroll if content exceeds viewport height */
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
+    align-items: center;
 }
 
-/* Style for the heading */
+
 .board h1 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Style for the toolbar buttons */
+
 .button {
     border-radius: 5px;
-    background-color: gray; /* Green background */
+    background-color: gray;
     border: none;
     color: white;
     padding: 10px;
     text-align: center;
     text-decoration: none;
-    display: block;            /* Stack buttons vertically */
+    display: block;
     font-size: 16px;
     margin: 8px 0;
     cursor: pointer;
@@ -56,10 +54,9 @@ main {
 }
 
 .button:hover {
-    background-color: darkgrey; /* Darker green on hover */
+    background-color: darkgrey;
 }
 
-/* Style for labels in the toolbar */
 .toolbar label {
     display: block;
     margin: 10px 0 5px;
@@ -71,18 +68,16 @@ main {
     margin-top: 4rem;
 }
 
-/* Style for the grid */
+
 #grid {
     display: grid;
     grid-template-columns: repeat(10, 60px);
     grid-template-rows: repeat(10, 60px);
     gap: 0;
-    margin: 0 auto; /* Center grid */
+    margin: 0 auto;
 }
 
 
-
-/* Style for grid cells */
 .cell {
     width: 60px;
     height: 60px;
@@ -94,7 +89,6 @@ main {
     position: relative;
 }
 
-/* Style for the legend */
 .legend {
     margin-top: 20px;
     display: flex;
@@ -120,16 +114,15 @@ main {
     margin-right: 5px;
 }
 
-/* Additional styles for cell states */
 .cell[data-weight="1"] {
-    background-color: rgb(10, 150, 10); /* Light green */
+    background-color: rgb(10, 150, 10);
 }
 
 .cell[data-weight="2"] {
     background-color: darkgreen;
 }
 
-.cell[data-weight="3"] {
+.cell[data-weight="7"] {
     background-color: rgb(73, 65, 65);
 }
 

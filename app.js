@@ -3,8 +3,10 @@ $(document).ready(function() {
     let gridSize = 10;
     let startCell = null;
     let goalCell = null;
-    let selecting = 'start'; // 'start' or 'goal'
+    let selecting = 'start';
     let selectedAlgorithm = 'bfs';
+    let selectedColor = "#1D84B5";
+    let tileWeights = [1, 2, 7];
 
     // Create the grid with weights
     for (let row = 0; row < gridSize; row++) {
@@ -13,8 +15,8 @@ $(document).ready(function() {
             cell.attr('data-row', row);
             cell.attr('data-col', col);
             
-            // Add random weight to each cell (1 to 10)
-            let weight = Math.floor(Math.random()*3) + 1;
+            // give tile costs
+            let weight = tileWeights[Math.floor(Math.random()*tileWeights.length)];
             cell.attr('data-weight', weight);
 
             // cell.text(weight); // Display the weight in the cell
@@ -24,7 +26,7 @@ $(document).ready(function() {
     }
 
 
-    // Cell click event
+    // handle clicking grid cells
     $('.cell').click(function() {
         let row = parseInt($(this).attr('data-row'));
         let col = parseInt($(this).attr('data-col'));
@@ -45,7 +47,7 @@ $(document).ready(function() {
             goalCell = { row: row, col: col };
             $(this).addClass('goal').append('<div class="goal-marker"></div>');
         } else if (selecting === 'mountain') {
-            $(this).attr('data-weight', 3);
+            $(this).attr('data-weight', 7);
         } else if (selecting === 'cliff') {
             $(this).attr('data-weight', 100);
         } else if (selecting === 'grass') {
@@ -55,9 +57,8 @@ $(document).ready(function() {
         }
 
     });
-    selectedColor = "#1D84B5"
-    // Toolbar buttons
-// Functions for selecting terrain types
+    
+// Toolbar even handlers
 function selectStart() {
     selecting = 'start';
     $('.select-button').css('background-color', '');
@@ -126,7 +127,7 @@ function selectUcs() {
     $('#ucs').css('background-color', selectedColor);
 }
 
-// Event handlers for selection buttons
+// grid cell click buttons
 $('#select-start').click(selectStart);
 $('#select-goal').click(selectGoal);
 $('#select-mountain').click(selectMountain);
@@ -134,13 +135,13 @@ $('#select-cliff').click(selectCliff);
 $('#select-grass').click(selectGrass);
 $('#select-hills').click(selectHills);
 
-// Event handlers for algorithm buttons
+// algorithm buttons
 $('#dfs').click(selectDFS);
 $('#bfs').click(selectBFS);
 $('#astar').click(selectAStar);
 $('#ucs').click(selectUcs);
 
-// Event handlers for clicking on div elements (assuming they have IDs)
+// buttons to enable editing grid cells
 $('#start').click(selectStart);
 $('#goal').click(selectGoal);
 $('#mountain').click(selectMountain);
@@ -186,14 +187,13 @@ $(document).keydown(function(e) {
         case 'r':
             $('#reset-grid').click();
             break;
-        // Start search with Enter key
         case 'shift':
             $('#start-search').click();
             break;
     }
 });
 
-// Start search button click handler
+// start search w/ algo button
 $('#start-search').click(function() {
     if (!startCell || !goalCell) {
         alert('Please select both start and goal cells.');
@@ -227,7 +227,7 @@ $('#start-search').click(function() {
 
     function clearSearch()  {
         if($('.cell').hasClass('visited') || $('.cell').hasClass('frontier') || $('.cell').hasClass('path')) {
-            // remove div in cell with attr of visited-marker, frontier-marker, path-marker
+
             $('.cell').removeClass('visited frontier path');
             $('.cell').find('.visited-marker').remove();
             $('.cell').find('.frontier-marker').remove();
@@ -248,7 +248,6 @@ $('#start-search').click(function() {
 
     function getNeighbors(row, col) {
         let neighbors = [];
-        // Directions: up, down, left, right
         let dirs = [
             { row: -1, col: 0 }, // up
             { row: 1, col: 0 },  // down
@@ -325,16 +324,16 @@ $('#start-search').click(function() {
             });
 
             // Continue BFS after a delay
-            setTimeout(bfsStep, 100);
+            setTimeout(bfsStep, 50);
         }
 
         bfsStep();
     }
 
     // UCS Algorithm
-    function ucs() { // <-- Added UCS function
+    function ucs() {
         let frontier = [];
-        let statesExplored = 0; // <-- Initialize states explored
+        let statesExplored = 0;
         let cameFrom = [];
         let costSoFar = [];
 
@@ -353,7 +352,7 @@ $('#start-search').click(function() {
         function ucsStep() {
             if (frontier.length === 0) {
                 alert('No path found.');
-                isAnimating = false; // <-- Reset animating flag
+                isAnimating = false;
                 return;
             }
 
@@ -361,8 +360,8 @@ $('#start-search').click(function() {
             frontier.sort((a, b) => a.priority - b.priority);
             let currentData = frontier.shift();
             let current = currentData.cell;
-            statesExplored++; // <-- Increment states explored
-            $('#states-explored').text('States Explored: ' + statesExplored); // <-- Update UI
+            statesExplored++;
+            $('#states-explored').text('States Explored: ' + statesExplored);
             let row = current.row;
             let col = current.col;
 
@@ -374,7 +373,6 @@ $('#start-search').click(function() {
             if (row === goalCell.row && col === goalCell.col) {
                 // Found the goal
                 reconstructPath(cameFrom, current);
-                // Display total states explored
                 console.log('Total states explored:', statesExplored); // <-- Output total states
                 $('#states-explored').text('States Explored: ' + statesExplored); // <-- Update UI
                 return;
@@ -398,7 +396,6 @@ $('#start-search').click(function() {
                 }
             });
 
-            // Continue UCS after a delay
             setTimeout(ucsStep, 50);
         }
 
@@ -471,7 +468,7 @@ $('#start-search').click(function() {
             });
 
             // Continue DFS after a delay
-            setTimeout(dfsStep, 100);
+            setTimeout(dfsStep, 50);
         }
 
         dfsStep();
@@ -529,7 +526,7 @@ $('#start-search').click(function() {
 
             if (row === goalCell.row && col === goalCell.col) {
                 // Found the goal
-                $('#states-explored').text('States Explored: ' + statesExplored); // <-- Update UI
+                $('#states-explored').text('States Explored: ' + statesExplored);
                 reconstructPath(cameFrom, current);
                 return;
             }
@@ -563,8 +560,8 @@ $('#start-search').click(function() {
         astarStep();
     }
 
-    function heuristic(a, b) {
-        // Using Manhattan distance
+    // manhattan
+    function heuristic(a, b) { 
         return Math.abs(a.row - b.row) + Math.abs(a.col - b.col);
     }
 
@@ -579,23 +576,23 @@ $('#start-search').click(function() {
 
 function reconstructPath(cameFrom, current) {
     let path = [];
-    let totalCost = 0; // Initialize path cost
+    let totalCost = 0;
 
     while (current) {
         path.push(current);
         let prev = cameFrom[current.row][current.col];
         if (prev) {
             let weight = parseInt(getCell(current.row, current.col).attr('data-weight'));
-            totalCost += weight; // Accumulate path cost
+            totalCost += weight;
         }
         current = prev;
     }
 
     path.reverse();
 
-    // Display path cost
-    console.log('Path cost:', totalCost); // Output to console
-    $('#path-cost').text('Path Cost: ' + totalCost); // Update the UI
+    // update path cost ui
+    console.log('Path cost:', totalCost);
+    $('#path-cost').text('Path Cost: ' + totalCost);
 
     animatePath(path);
 }
@@ -621,6 +618,3 @@ function reconstructPath(cameFrom, current) {
         next();
     }
 });
-
-// add variable to only allow button to click if not animating
-// use grid weight to determine cost of path
