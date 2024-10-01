@@ -1,0 +1,181 @@
+/* Reset default browser margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: row; /* Arrange children horizontally */
+    height: 100vh;       /* Full viewport height */
+}
+
+/* Style for the toolbar on the left */
+.tools {
+    width: 250px;               /* Fixed width for the toolbar */
+    background-color: #f0f0f0;  /* Light grey background */
+    padding: 20px;
+    overflow-y: auto;           /* Scroll if content exceeds viewport height */
+}
+
+/* Style for the board on the right */
+.board {
+    flex-grow: 1;        /* Take up remaining space */
+    padding: 20px;
+    overflow-y: auto;    /* Scroll if content exceeds viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+}
+
+/* Style for the heading */
+.board h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Style for the toolbar buttons */
+.button {
+    border-radius: 5px;
+    background-color: gray; /* Green background */
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;            /* Stack buttons vertically */
+    font-size: 16px;
+    margin: 8px 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.button:hover {
+    background-color: darkgrey; /* Darker green on hover */
+}
+
+/* Style for labels in the toolbar */
+.toolbar label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.toolbar {
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+/* Style for the grid */
+#grid {
+    display: grid;
+    grid-template-columns: repeat(10, 60px);
+    grid-template-rows: repeat(10, 60px);
+    gap: 0;
+    margin: 0 auto; /* Center grid */
+}
+
+
+
+/* Style for grid cells */
+.cell {
+    width: 60px;
+    height: 60px;
+    background-color: #eee;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Style for the legend */
+.legend {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.legend div {
+    margin: 10px;
+    font-weight: bold;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 10px;
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/* Additional styles for cell states */
+.cell[data-weight="1"] {
+    background-color: rgb(10, 150, 10); /* Light green */
+}
+
+.cell[data-weight="2"] {
+    background-color: darkgreen;
+}
+
+.cell[data-weight="3"] {
+    background-color: rgb(73, 65, 65);
+}
+
+.cell[data-weight="100"] {
+    background-color: black;
+}
+
+
+.frontier-marker {
+    background-color: orange;
+    opacity: 0.3;
+    border-radius: 50%;
+    width: 35%;
+    height: 35%;
+    position: absolute;
+}
+
+.visited-marker {
+    background-color: white;
+    opacity: 0.9;
+    border-radius: 50%;
+    width: 35%;
+    height: 35%;
+    position: absolute;
+}
+
+.start-marker {
+    background-color: orange;
+    border-radius: 50%;
+    width: 75%;
+    height: 75%;
+    position: absolute;
+}
+
+.path-marker {
+    background-color: orange;
+    border-radius: 10%;
+    width: 80%;
+    height: 80%;
+    position: absolute;
+}
+
+.goal-marker {
+    background-color: red;
+    border-radius: 50%;
+    width: 75%;
+    height: 75%;
+    position: absolute;
+}

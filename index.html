@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LandgridProblem Visualization</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <main>
+        <div class="tools">
+            <div class="toolbar">
+                <div class="button select-button" id="select-start">Select Start (s)</div>
+                <div class="button select-button" id="select-goal">Select Goal (g)</div>
+                <div class="button select-button" id="select-mountain">Select Mountain (m)</div>
+                <div class="button select-button" id="select-hills">Select Hills (h)</div>
+                <div class="button select-button" id="select-grass">Select Grass (x)</div>
+                <div class="button select-button" id="select-cliff">Select Cliff (c)</div>
+                <div class="button" id="reset-grid">Reset Grid (r)</div>
+                <br>
+                <label>Select Algorithm:</label>
+                <div class="button algorithm-button algorithm" id="bfs" data-algorithm="bfs">BFS (b)</div>
+                <div class="button algorithm-button algorithm" id="dfs" data-algorithm="dfs">DFS (d)</div>
+                <div class="button algorithm-button algorithm" id="astar" data-algorithm="astar">A* (a)</div>
+                <div class="button algorithm-button algorithm" id="ucs" data-algorithm="ucs">UCS (u)</div>
+                <br>
+                <div class="button" id="start-search">Start Search (shift)</div>
+            </div>
+        </div>
+
+        <div class="board">
+            <h1>LandgridProblem Visualization</h1>
+            <div id="grid"></div>
+            <div class="legend">
+                <div id="states-explored">States Explored: 0</div>
+                <div id="path-cost">Path Cost: 0</div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
