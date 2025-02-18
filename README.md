@@ -1,5 +1,7 @@
 # Land Grid Pathfinding Visualization
 
+https://brendanml.github.io/algovis/
+
 A simple web-based tool to visualize pathfinding algorithms on a grid with various terrain types.
 
 ## Description
